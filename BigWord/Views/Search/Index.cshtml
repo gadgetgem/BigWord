@@ -1,0 +1,45 @@
+﻿@using BigWord.Data.Models
+@model List<Word>  
+
+@{  
+    ViewData["Title"] = "Search Words";
+    string query = Context.Request.Query["query"].ToString();
+}  
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <h2>Search Words</h2>  
+
+        <p>Search for existing words in database (not case sensitive).</p>
+
+        <form method="get" class="mb-3 d-flex align-items-center gap-2">
+            <input type="text" name="query" class="form-control w-auto" placeholder="Enter something to search" value="@query" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form> 
+
+        @if (ViewBag.Message != null)
+        {
+            <p class="text-info">@ViewBag.Message</p>
+        }
+        @if (Model != null && Model.Any())
+        {
+            <div class="ms-2">
+                Found @Model.Count matches:
+                <br/><br />
+                <div class="ms-4">
+                    <ul class="list-group">  
+                        @foreach (Word word in Model)  
+                        {  
+                            <li>@word.Value</li>  
+                        }  
+                    </ul>
+                </div>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(query))
+        {
+            <p>No words found for '@query'.</p>
+        }
+    </div>
+            
+</div>

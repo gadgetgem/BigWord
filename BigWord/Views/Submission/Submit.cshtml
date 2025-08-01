@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Find Longest Word";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+
+        <h2>Find Longest Word</h2>
+
+        <p>Please enter at least one word which matches the rules (max 500 characters):</p>
+
+        <div class="ms-4">
+            <ul>
+                <li>Word must be at least 8 characters long.</li>
+                <li>Word contains an uppercase letter.</li>
+                <li>Word contains a lowercase letter</li>
+                <li>Word contains a digit</li>
+                <li>Word does not contain any repeated characters</li>
+            </ul>
+        </div>
+
+        <p>The longest word will be added to the database if it doesn't exist</p>
+        <br/>
+
+        <form method="post" class="mb-3 d-flex align-items-center gap-2">
+            <input type="text" name="input" class="form-control w-50 d-inline-block" placeholder="Enter your word(s)" required maxlength="500" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="text-danger">@ViewBag.Error</p>
+        }
+        @if (ViewBag.Success != null)
+        {
+            <p class="text-success">@ViewBag.Success</p>
+        }
+    </div>
+</div>
